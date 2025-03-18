@@ -1,1 +1,1 @@
-# ProjectX
+# AI Fake News Detection Web App
