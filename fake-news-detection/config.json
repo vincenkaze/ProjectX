@@ -1,0 +1,14 @@
+{
+    "supabase": {
+      "url": "https://rdlzaqwvrzpdvmcpadpu.supabase.co",
+      "key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkbHphcXd2cnpwZHZtY3BhZHB1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI1ODA0OTAsImV4cCI6MjA1ODE1NjQ5MH0.JuUmPcmA_svaY9x2dWJlAIVM4KoBzJJszjzaR_M-uT4"
+    },
+    "rss_feeds": [
+      "https://feeds.bbci.co.uk/news/rss.xml",
+      " http://rss.cnn.com/rss/edition.rss" ,
+      " https://feeds.feedburner.com/ndtvnews-top-stories" ,
+      " https://www.thehindu.com/feeder/default.rss" ,
+      " https://news.google.com/rss?hl=en&gl=US&ceid=US:en"
+    ],
+    "model_path": "backend/fake_news_model.pkl"
+  }

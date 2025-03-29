@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+feedparser
+supabase
+python-dotenv
+pandas
+scikit-learn
+joblib
+requests
+pytest
