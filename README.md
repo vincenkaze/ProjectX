@@ -1,1 +1,1 @@
-# AI Fake News Detection Web App
+# AI Fake News Detection
