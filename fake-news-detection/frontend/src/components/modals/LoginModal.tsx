@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { loginUser } from "../../services/authService";
 
 const LoginModal = ({onClose, onSwitchToSignUp,}: {onClose: () => void; onSwitchToSignUp: () => void;}) => {
   const { login } = useAuth();
@@ -15,8 +14,7 @@ const LoginModal = ({onClose, onSwitchToSignUp,}: {onClose: () => void; onSwitch
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const user = await loginUser(form.email, form.password); // fetch from backend
-      login(user); // set into AuthContext
+      await login(form.email, form.password); 
       localStorage.removeItem("predict_count");
       onClose();
     } catch (err: any) {
