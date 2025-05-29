@@ -49,8 +49,9 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     }
 
     toast.success("Account created! Redirecting...");
-    login(user);
+    await login(formData.email, formData.password);
     navigate('/');
+
   } catch (err: any) {
       console.error("Signup failed:", err);
       const msg = err?.response?.data?.detail || err?.message || "Failed to create an account";
