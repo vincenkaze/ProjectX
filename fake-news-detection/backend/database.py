@@ -45,12 +45,13 @@ def create_user(user: UserCreate):
             "password": hashed
         }).execute()
 
-        if response.error is None:
+        if response.data is not None:
             logger.info("User created successfully")
             return {"message": "User created"}
         else:
-            logger.error(f"Supabase insert error: {response.error}")
-            return {"error": str(response.error)}
+            error_msg = response.model_dump().get("error")
+            logger.error(f"Supabase insert error: {error_msg}")
+            return {"error": str(error_msg)}
 
     except Exception as e:
         logger.error(f"Exception in create_user: {e}")
