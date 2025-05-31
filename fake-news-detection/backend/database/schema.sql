@@ -55,14 +55,3 @@ CREATE TABLE feedback (
   analysis_id UUID NOT NULL REFERENCES analysis(analysis_id),
   rating INTEGER CHECK (rating BETWEEN 1 AND 5)
 );
-
--- ========================
--- 6. ADMINS
--- ========================
-create table admins (
-  admin_id serial primary key,
-  username text unique not null,
-  password_hash text not null,
-  email text unique not null,
-  last_login timestamp default current_timestamp
-);
