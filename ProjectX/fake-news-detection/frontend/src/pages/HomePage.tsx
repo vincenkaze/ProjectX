@@ -57,20 +57,101 @@ export default function HomePage({ setShowSignUp }: HomePageProps) {
       <section id="how-it-works" className="py-5 bg-light">
         <div className="container">
           <h2 className="text-center fw-bold mb-5">How It Works</h2>
-          <div className="row">
-            {/* Add steps: Content Analysis, Source Verification, Pattern Recognition */}
-          </div>
+            <div className="row text-center">
+              <div className="col-md-4 mb-4">
+                <div className="p-4 border rounded shadow-sm h-100">
+                  <i className="fas fa-rss fa-2x text-primary mb-3"></i>
+                  <h5>Step 1: Collect</h5>
+                  <p className="text-muted">TruthGuard automatically gathers news from trusted RSS feeds in real-time.</p>
+                </div>
+              </div>
+              <div className="col-md-4 mb-4">
+                <div className="p-4 border rounded shadow-sm h-100">
+                  <i className="fas fa-brain fa-2x text-success mb-3"></i>
+                  <h5>Step 2: Analyze</h5>
+                  <p className="text-muted">Our AI model uses NLP + ML to detect bias, misinformation, or manipulative patterns.</p>
+                </div>
+              </div>
+              <div className="col-md-4 mb-4">
+                <div className="p-4 border rounded shadow-sm h-100">
+                  <i className="fas fa-check-circle fa-2x text-info mb-3"></i>
+                  <h5>Step 3: Verify</h5>
+                  <p className="text-muted">The system provides a clear Fake/Real classification with confidence score and feedback options.</p>
+                </div>
+              </div>
+            </div>
         </div>
       </section>
 
       <section id="faq" className="py-5">
         <div className="container">
           <h2 className="text-center fw-bold mb-5">Frequently Asked Questions</h2>
-          <div className="accordion" id="faqAccordion">
-            {/* FAQ accordion items */}
+            <div className="accordion" id="faqAccordion">
+
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="faq1">
+                  <button
+                    className="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse1"
+                    aria-expanded="true"
+                    aria-controls="collapse1"
+                    >
+                      How accurate is TruthGuard?
+                  </button>
+                </h2>
+              <div id="collapse1" className="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+              <div className="accordion-body">
+                TruthGuard achieves high accuracy using ML models trained on large datasets. Accuracy improves as more users contribute feedback.
+              </div>
+            </div>
+        </div>
+
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="faq2">
+            <button
+              className="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse2"
+              aria-expanded="false"
+              aria-controls="collapse2"
+            >
+              Do I need an account to use it?
+            </button>
+          </h2>
+        <div id="collapse2" className="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+          <div className="accordion-body">
+            No account is required to check news. However, features like saving results and submitting feedback require a free account.
           </div>
         </div>
-      </section>
+      </div>
+
+      <div className="accordion-item">
+        <h2 className="accordion-header" id="faq3">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse3"
+            aria-expanded="false"
+            aria-controls="collapse3"
+          >
+            Can I fully trust the results?
+          </button>
+        </h2>
+        <div id="collapse3" className="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+          <div className="accordion-body">
+            No system is perfect. TruthGuard provides probabilities and context, but users should always verify with multiple trusted sources.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
     </>
   );
 }
