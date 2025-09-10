@@ -32,10 +32,10 @@ export default function Footer() {
           <div className="col-lg-3 col-md-6">
             <h5 className="mb-4">Connect With Us</h5>
             <div className="social-icons mb-3">
-              <a href="#" className="text-white-50 me-3"><i className="fab fa-twitter fa-lg" /></a>
-              <a href="#" className="text-white-50 me-3"><i className="fab fa-facebook-f fa-lg" /></a>
-              <a href="#" className="text-white-50 me-3"><i className="fab fa-linkedin-in fa-lg" /></a>
-              <a href="#" className="text-white-50"><i className="fab fa-github fa-lg" /></a>
+              <a href="http://x.com/TruthGaurd28235" className="text-white-50 me-3"><i className="fab fa-twitter fa-lg" /></a>
+              <a href="https://www.facebook.com/" className="text-white-50 me-3"><i className="fab fa-facebook-f fa-lg" /></a>
+              <a href="https://in.linkedin.com/" className="text-white-50 me-3"><i className="fab fa-linkedin-in fa-lg" /></a>
+              <a href="https://github.com/" className="text-white-50"><i className="fab fa-github fa-lg" /></a>
             </div>
             <p className="mb-2">Subscribe to our newsletter</p>
             <div className="input-group">
