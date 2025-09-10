@@ -45,8 +45,8 @@ export default function HomePage({ setShowSignUp }: HomePageProps) {
             </div>
             <div className="col-lg-6">
               <img
-                src="https://images.unsplash.com/photo-1549138144-42ff3cdd2bf8?q=80&w=2052&auto=format&fit=crop"
-                alt="AI analyzing data"
+                src="/image/horizon.png"
+                alt="TruthGuard digital shield"
                 className="img-fluid rounded shadow"
               />
             </div>
