@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { registerUser } from "../../services/authService";
 import { useAuth } from "../../context/AuthContext";
+import { validatePassword } from "../../utils/validators";
 
 interface SignUpFormProps {
   onSuccess?: () => void;
@@ -25,11 +26,14 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const errorMsg = validatePassword(formData.password);
+    if (errorMsg) {
+      setError(errorMsg);
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       return setError("Passwords do not match");
-    }
-    if (formData.password.length < 6) {
-      return setError("Password must be at least 6 characters");
     }
 
     try {
@@ -48,14 +52,15 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
 
       await login(formData.email, formData.password);
       if (onSuccess) onSuccess();
-    } catch (err: any) {
-      setError(
+      } catch (err: any) {
+        setError(
         err?.response?.data?.detail || err?.message || "Failed to create an account"
       );
     } finally {
       setIsLoading(false);
     }
   };
+
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>

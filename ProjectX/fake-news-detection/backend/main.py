@@ -7,6 +7,7 @@ from datetime import datetime, timedelta, timezone
 from pydantic import EmailStr
 import logging
 import bcrypt
+import re
 
 from backend.models import predict_fake_news,FeedbackInput, NewsText, UserCreate, TokenWithUser, PasswordResetRequest, PasswordResetConfirm
 from backend.database import get_news, create_user, verify_user, store_feedback, store_analysis, FeedbackInput
@@ -60,6 +61,16 @@ def verify_password_reset_token(token: str):
     except JWTError:
         raise HTTPException(status_code=400, detail="Invalid reset token")
 
+def validate_password_strength(password: str):
+    if len(password) < 12:
+        raise HTTPException(status_code=400, detail="Password must be at least 12 characters long.")
+    if not re.search(r"[a-z]", password):
+        raise HTTPException(status_code=400, detail="Password must contain at least one lowercase letter.")
+    if not re.search(r"[A-Z]", password):
+        raise HTTPException(status_code=400, detail="Password must contain at least one uppercase letter.")
+    if not re.search(r"[0-9]", password):
+        raise HTTPException(status_code=400, detail="Password must contain at least one number.")
+
 @app.get("/")
 def home():
     return {"message": "Fake News Detection API is Running!"}
@@ -107,6 +118,9 @@ def predict(data: NewsText):
 @app.post("/auth/register", response_model=TokenWithUser)
 def register(user: UserCreate):
     try:
+        
+        validate_password_strength(user.password)
+
         existing_user = supabase.table("users").select("*").eq("email", user.email).execute()
         if existing_user.data:
             raise HTTPException(status_code=400, detail="Email is already registered.")
