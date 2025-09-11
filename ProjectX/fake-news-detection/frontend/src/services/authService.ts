@@ -46,26 +46,33 @@ interface LoginResponse {
 }
 
 export const loginUser = async (email: string, password: string): Promise<User> => {
-  const response = await axios.post<LoginResponse>(
-    `${API_URL}/auth/login`,
-    new URLSearchParams({ username: email, password }),
-    {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+  try {
+    const response = await axios.post<LoginResponse>(
+      `${API_URL}/auth/login`,
+      new URLSearchParams({ username: email, password }),
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    const data = response.data;
+
+    if (data.access_token && data.user) {
+      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("user_id", data.user.id);
+      return data.user;
     }
-  );
 
-  const data = response.data;
-
-  if (data.access_token && data.user) {
-    localStorage.setItem("token", data.access_token);
-    localStorage.setItem("user", JSON.stringify(data.user));
-    localStorage.setItem("user_id", data.user.id);
-    return data.user;
+    throw new Error("Login failed");
+  } catch (error: any) {
+    if (error?.response?.data?.detail) {
+      throw new Error(error.response.data.detail);
+    }
+    throw new Error("An unexpected error occurred");
   }
-
-  throw new Error("Login failed");
 };
 
 export const logoutUser = (): void => {

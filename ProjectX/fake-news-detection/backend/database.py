@@ -97,13 +97,21 @@ def get_news(limit: int = 10, offset: int = 0):
 
 def verify_user(email: str, password: str):
     try:
-        user_data = supabase.table("users").select("*").eq("email", email).single().execute()
-        user = user_data.data
-        if user and bcrypt.checkpw(password.encode(), user["password"].encode()):
-            return user
-    except Exception:
-        pass
-    return None
+        response = supabase.table("users").select("*").eq("email", email).execute()
+        users = response.data or []
+
+        if not users:
+            return None, "User does not exist"
+
+        user = users[0]  # take the first match
+
+        if bcrypt.checkpw(password.encode(), user["password"].encode()):
+            return user, None
+        else:
+            return None, "Invalid password"
+
+    except Exception as e:
+        return None, str(e)
     
 def store_analysis(prediction_id: str, text: str, prediction: str, confidence: float):
     """Insert the analysis result into the analysis table."""

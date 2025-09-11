@@ -138,9 +138,15 @@ def register(user: UserCreate):
 
 @app.post("/auth/login", response_model=TokenWithUser)
 def login_user(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = verify_user(form_data.username, form_data.password)
-    if not user:
-        raise HTTPException(status_code=401, detail="Invalid credentials")
+    user, error = verify_user(form_data.username, form_data.password)
+
+    if error == "User does not exist":
+        raise HTTPException(status_code=404, detail="User does not exist")
+    elif error == "Invalid password":
+        raise HTTPException(status_code=401, detail="Invalid password")
+    elif error:  # unexpected db errors
+        raise HTTPException(status_code=400, detail=error)
+
     access_token = create_access_token(data={"sub": user["email"]})
     return {
         "access_token": access_token,
