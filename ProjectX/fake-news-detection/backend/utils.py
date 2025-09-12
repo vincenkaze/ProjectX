@@ -8,10 +8,6 @@ def clean_text(text: str) -> str:
     text = re.sub(r"<.*?>", "", text) # Remove HTML tags
     text = re.sub(r"[^a-z0-9\s]", "", text) # Remove non-alphanumeric characters except spaces
 
-    # bias_words = ["reuters", "bbc", "cnn", "said", "report", "breaking", "government", "official", "nasa", "confirmed", "mars", "police", "arrest", "shoot"]
-    # for word in bias_words:
-    #     text = re.sub(rf"\b{word}\b", "", text)
-
     # Replace multiple spaces with a single space and strip leading/trailing spaces
     return re.sub(r"\s+", " ", text).strip()
 
