@@ -211,7 +211,7 @@ body {
   padding: 2rem;
   background: #fff;
   border-radius: 0.75rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
 .auth-container h2 {
@@ -494,4 +494,31 @@ body {
   color: var(--danger);
   font-size: 0.95rem;
   margin-top: 0.7rem;
+}
+
+/* Password toggle (eye icon inside inputs) */
+.form-group {
+  position: relative; /* lock children inside */
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field {
+  padding-right: 2.5rem; /* give room for the eye */
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: calc(50% + 10px); /* offset down because label sits above */
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.password-toggle:hover {
+  opacity: 1;
 }

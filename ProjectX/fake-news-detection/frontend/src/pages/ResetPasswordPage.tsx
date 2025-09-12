@@ -22,25 +22,36 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
-        <h2 className="text-2xl font-bold mb-4">Set a New Password</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
+        <div className="text-center">
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+            Set a New Password
+          </h2>
+          <p className="mt-2 text-sm text-gray-600">
+            Enter your new password below to reset your account.
+          </p>
+        </div>
+
         <form onSubmit={handleReset} className="space-y-4">
           <input
             type="password"
             placeholder="Enter new password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            className="w-full border p-2 rounded"
+            className="input-field w-full"
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+            className="btn btn-primary w-full"
           >
             Reset Password
           </button>
         </form>
-        {message && <p className="mt-4 text-center">{message}</p>}
+
+        {message && (
+          <p className="mt-4 text-center text-sm text-gray-600">{message}</p>
+        )}
       </div>
     </div>
   );

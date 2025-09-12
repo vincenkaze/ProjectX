@@ -15,6 +15,8 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
     password: "",
     confirmPassword: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,6 +41,7 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
     try {
       setError("");
       setIsLoading(true);
+
       const user = await registerUser(
         formData.email,
         formData.password,
@@ -52,15 +55,14 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
 
       await login(formData.email, formData.password);
       if (onSuccess) onSuccess();
-      } catch (err: any) {
-        setError(
+    } catch (err: any) {
+      setError(
         err?.response?.data?.detail || err?.message || "Failed to create an account"
       );
     } finally {
       setIsLoading(false);
     }
   };
-
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
@@ -94,31 +96,45 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
         />
       </div>
 
+      {/* Password with eye toggle */}
       <div className="form-group">
         <label htmlFor="password">Password</label>
         <input
           id="password"
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Create a password"
           required
           value={formData.password}
           onChange={handleChange}
           className="input-field"
         />
+        <img
+          src={showPassword ? "/icons/eye-off.png" : "/icons/eye.png"}
+          alt="Toggle password visibility"
+          className="password-toggle"
+          onClick={() => setShowPassword(!showPassword)}
+        />
       </div>
 
+      {/* Confirm password with eye toggle */}
       <div className="form-group">
         <label htmlFor="confirmPassword">Confirm Password</label>
         <input
           id="confirmPassword"
           name="confirmPassword"
-          type="password"
+          type={showConfirmPassword ? "text" : "password"}
           placeholder="Re-enter your password"
           required
           value={formData.confirmPassword}
           onChange={handleChange}
           className="input-field"
+        />
+        <img
+          src={showConfirmPassword ? "/icons/eye-off.png" : "/icons/eye.png"}
+          alt="Toggle confirm password visibility"
+          className="password-toggle"
+          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
         />
       </div>
 

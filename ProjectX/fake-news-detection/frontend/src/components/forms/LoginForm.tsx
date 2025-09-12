@@ -11,6 +11,7 @@ export default function LoginForm({ onSuccess, onForgotPassword }: LoginFormProp
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,17 +50,24 @@ export default function LoginForm({ onSuccess, onForgotPassword }: LoginFormProp
         />
       </div>
 
+      {/* Password with eye toggle */}
       <div className="form-group">
         <label htmlFor="password">Password</label>
         <input
           id="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           name="password"
           placeholder="Enter your password"
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="input-field"
+        />
+        <img
+          src={showPassword ? "/icons/eye-off.png" : "/icons/eye.png"}
+          alt="Toggle password visibility"
+          className="password-toggle"
+          onClick={() => setShowPassword(!showPassword)}
         />
       </div>
 
@@ -68,7 +76,6 @@ export default function LoginForm({ onSuccess, onForgotPassword }: LoginFormProp
           <input type="checkbox" name="remember-me" /> Remember me
         </label>
 
-        {/* This triggers the modal instead of navigation */}
         {onForgotPassword ? (
           <span
             className="link cursor-pointer"
